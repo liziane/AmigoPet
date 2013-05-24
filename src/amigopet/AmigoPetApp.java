@@ -10,8 +10,11 @@ public class AmigoPetApp {
         
         public static void main(String[] args) {
             
-        DbConnection db = new DbConnection();
+        Animal animal = new Animal("gato", "persa", "luigi", "2", "pretinho lindo");
+        System.out.println(animal.getNome() + animal.getAdotante());
 
+        DbConnection db = new DbConnection();
+        
         String query = "SELECT * FROM animal "
                 + "WHERE tipo LIKE ?";
 
