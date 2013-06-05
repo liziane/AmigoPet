@@ -1,5 +1,5 @@
 
-package amigopet;
+package model;
 import java.io.Serializable;
 import javax.swing.JOptionPane;
 
@@ -11,7 +11,7 @@ public class ShowMessageDialog extends JOptionPane implements Serializable{
         showMessageDialog(null, message, title, ERROR_MESSAGE);
     }
 
-    public static void sucess(Object message, String title) {
+    public static void success(Object message, String title) {
         showMessageDialog(null, message, title, PLAIN_MESSAGE);
     }
 

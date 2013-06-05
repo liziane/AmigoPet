@@ -1,4 +1,4 @@
-package amigopet;
+package model;
 
 public class Admin {
     Credenciais credenciais;

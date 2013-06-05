@@ -1,11 +1,12 @@
-package dao;
+package controller;
 
-import amigopet.*;
+import model.Animal;
+import model.DbConnection;
 import java.sql.SQLException;
 
 public class AnimalDAO{
     
-    DbConnection db = new DbConnection();
+    DbConnection db;
     
     public AnimalDAO(DbConnection db){
         this.db = db;
@@ -13,7 +14,7 @@ public class AnimalDAO{
     
     public int salvar(Animal animal) throws SQLException {
         int cod = 0;
-        String query = "INSERT INTO animal (tipo, raca, nome, idade, observacoes, adotante, adotado)"
+        String query = "INSERT INTO animal (tipo, raca, nome, idade, observacoes, adotado, adotante)"
                 + "VALUES (?, ?, ? ,? ,?, ?, ?)";
         try {
             db.connect();
