@@ -25,10 +25,20 @@ public class FileChooser extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jFileChooser1 = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jFileChooser1, org.jdesktop.beansbinding.ELProperty.create("${selectedFile}"), jFileChooser1, org.jdesktop.beansbinding.BeanProperty.create("selectedFile"));
+        bindingGroup.addBinding(binding);
+
+        jFileChooser1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jFileChooser1ComponentAdded(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -47,8 +57,14 @@ public class FileChooser extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jFileChooser1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jFileChooser1ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ComponentAdded
 
     /**
      * @param args the command line arguments
@@ -86,5 +102,6 @@ public class FileChooser extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

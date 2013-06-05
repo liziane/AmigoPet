@@ -15,7 +15,7 @@ public class AdotanteDAO{
     public int salvar(Adotante adotante) throws SQLException {
         int cod = 0;
         String query = "INSERT INTO adotante (nome, cpf, endereco, email, fone)"
-                + "VALUES (?, ?, ? ,?)";
+                + "VALUES (?, ?, ?, ?, ?)";
         try {
             db.connect();
             cod = db.executeUpdateAndReturn(query,

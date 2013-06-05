@@ -1,8 +1,6 @@
-
 package view;
 
 public class AdminHome extends javax.swing.JFrame {
-
 
     public AdminHome() {
         initComponents();
