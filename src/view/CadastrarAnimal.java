@@ -11,7 +11,7 @@ import model.DbConnection;
 import model.ShowMessageDialog;
 
 public class CadastrarAnimal extends javax.swing.JFrame {
-
+    String urlIcon;
     public CadastrarAnimal() {
         initComponents();
     }
@@ -39,7 +39,7 @@ public class CadastrarAnimal extends javax.swing.JFrame {
         pn_mostrarImagem = new javax.swing.JPanel();
         lbl_image = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(249, 227, 203));
 
@@ -106,40 +106,41 @@ public class CadastrarAnimal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabel5)
-                    .add(jLabel3)
-                    .add(jLabel1)
-                    .add(jLabel2))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(jPanel2Layout.createSequentialGroup()
-                            .add(txt_raca)
-                            .add(18, 18, 18)
-                            .add(jLabel4)
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(txt_idade, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(txt_nomeAnimal)
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 385, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(opt_tipoAnimal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 151, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(btn_escolherFoto)
-                    .add(pn_mostrarImagem, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(193, Short.MAX_VALUE))
-            .add(jPanel2Layout.createSequentialGroup()
-                .add(21, 21, 21)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(jPanel2Layout.createSequentialGroup()
-                        .add(jLabel6)
-                        .add(56, 56, 56))
-                    .add(jPanel2Layout.createSequentialGroup()
-                        .add(btn_limpaForm)
+                        .addContainerGap()
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(jLabel5)
+                            .add(jLabel3)
+                            .add(jLabel1)
+                            .add(jLabel2))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                .add(jPanel2Layout.createSequentialGroup()
+                                    .add(txt_raca)
+                                    .add(18, 18, 18)
+                                    .add(jLabel4)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(txt_idade, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(txt_nomeAnimal)
+                                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 385, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(opt_tipoAnimal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 151, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(18, 18, 18)
-                        .add(btn_cadAnimal)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(btn_escolherFoto)
+                            .add(pn_mostrarImagem, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(jPanel2Layout.createSequentialGroup()
+                        .add(19, 19, 19)
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(jPanel2Layout.createSequentialGroup()
+                                .add(jLabel6)
+                                .add(56, 56, 56))
+                            .add(jPanel2Layout.createSequentialGroup()
+                                .add(btn_limpaForm)
+                                .add(18, 18, 18)
+                                .add(btn_cadAnimal)))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -205,7 +206,8 @@ public class CadastrarAnimal extends javax.swing.JFrame {
                                        txt_nomeAnimal.getText(),
                                        txt_idade.getText(),
                                        txt_obs.getText());
-        
+        novoAnimal.setImagem(urlIcon);
+                                       
         AnimalDAO animalDAO = new AnimalDAO(new DbConnection());
         try {
             animalDAO.salvar(novoAnimal);
@@ -218,8 +220,9 @@ public class CadastrarAnimal extends javax.swing.JFrame {
 
     private void btn_escolherFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_escolherFotoActionPerformed
         JFileChooser filechooser = new JFileChooser();
-        String file = filechooser.getSelectedFile().getPath();
-        lbl_image.setIcon(new ImageIcon(file));
+        filechooser.showDialog(null, null);
+        urlIcon = filechooser.getSelectedFile().getPath();
+        lbl_image.setIcon(new ImageIcon(urlIcon));
     }//GEN-LAST:event_btn_escolherFotoActionPerformed
 
     public static void main(String args[]) {

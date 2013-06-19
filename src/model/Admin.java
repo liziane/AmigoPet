@@ -1,17 +1,19 @@
 package model;
 
 public class Admin {
-    Credenciais credenciais;
+    String usuario;
+    String senha;
     String nome;
     boolean autenticado;
     
-    public Admin(Credenciais credenciais, String nome, boolean autenticado){
-        this.credenciais = credenciais;
-        this.nome = nome;   
-        this.autenticado = autenticado;
+    public Admin(String usuario, String senha){
+        
+        this.usuario = usuario;   
+        this.senha = senha;
     }
     
     public boolean login(){
+        
         return false;
     }
 }
