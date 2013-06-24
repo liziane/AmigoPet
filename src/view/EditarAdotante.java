@@ -72,7 +72,7 @@ public class EditarAdotante extends javax.swing.JFrame {
 
         jButton3.setText("Cadastrar");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(249, 227, 203));
 

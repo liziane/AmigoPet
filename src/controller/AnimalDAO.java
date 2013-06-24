@@ -6,6 +6,7 @@ import model.DbConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Admin;
 
 public class AnimalDAO{
     
@@ -103,6 +104,35 @@ public class AnimalDAO{
         return listaAnimais;
     }
     
+    public List<Animal> getListAnimaisNaoAdotados() throws SQLException {
+        String query = "SELECT * FROM animal WHERE adotado = '0'";
+        ResultSet result = null;
+        List<Animal> listaAnimais = null;
+        try {
+            db.connect();
+            result = db.executeQuery(query);
+            listaAnimais = mapperAnimal(result);
+        } finally {
+            result.close();
+            db.close();
+        }
+        return listaAnimais;
+    }
+    
+    
+        public void deleteAnimal(Animal animal) throws SQLException {
+        String query = "DELETE FROM animal WHERE id = '?'";
+        try {
+            db.connect();
+            db.executeUpdate(query, animal.getId());
+        } catch (SQLException ex) {
+            throw new SQLException(ex);
+        } finally {
+            query = null;
+            db.close();
+        }
+    }
+        
     private List<Animal> mapperAnimal(ResultSet resultSet) throws SQLException {
         List<Animal> listaAnimais = new ArrayList<Animal>();
         Animal animal = null;
@@ -124,4 +154,5 @@ public class AnimalDAO{
 
         return listaAnimais;
     }
+    
 }

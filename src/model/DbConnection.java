@@ -64,9 +64,9 @@ public final class DbConnection {
                     + "email text, \n"
                     + "endereco text, \n"
                     + "fone text NOT NULL)\n");
-
-
             
+            
+        
             close();
         } catch (SQLException e) {
             ShowMessageDialog.error("Não foi possivel criar ou acessar o banco de dados", "Erro");

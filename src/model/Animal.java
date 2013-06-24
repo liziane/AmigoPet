@@ -1,5 +1,9 @@
 package model;
 
+import controller.AnimalDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class Animal {
@@ -11,7 +15,7 @@ public class Animal {
    private String observacoes;
    private String adotante = "Sem adotante";
    private Boolean adotado = false;
-   private String urlImagem = null;
+   private String urlImagem = "/Users/lbrandin/NOAVATAR.jpg";
     
    public Animal(String tipo, String raca, String nome, String idade, String observacoes){
         this.tipo = tipo;
@@ -35,6 +39,15 @@ public class Animal {
     
     public void callAnimal(Animal animal){
         System.out.println(animal.nome + animal.adotante);
+    }
+    
+     public void excluir() {
+        AnimalDAO animalDAO = new AnimalDAO(new DbConnection());
+       try {
+           animalDAO.deleteAnimal(this);
+       } catch (SQLException ex) {
+           Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
     
     public int getId(){
@@ -108,4 +121,6 @@ public class Animal {
     public void setImagem(String urlImagem){
         this.urlImagem = urlImagem;
     }
+
+   
 }

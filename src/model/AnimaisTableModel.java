@@ -21,8 +21,7 @@ public class AnimaisTableModel extends TableModel{
         this.colunas = Arrays.asList("Nome", 
                                     "Tipo", 
                                     "Raça", 
-                                    "Idade",
-                                    "Adotado");
+                                    "Idade");
                                                                      
     }
     

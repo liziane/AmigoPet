@@ -1,13 +1,7 @@
 package view;
 
-import controller.AnimalDAO;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Animal;
-import model.DbConnection;
+import model.Admin;
+import model.ShowMessageDialog;
 
 public class Login extends javax.swing.JFrame {
 
@@ -26,8 +20,8 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_adminUser = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_adminPass = new javax.swing.JTextField();
         btn_loginAdmin = new javax.swing.JButton();
+        txt_senha = new javax.swing.JPasswordField();
         jPanel4 = new javax.swing.JPanel();
         btn_entrarVisitante = new javax.swing.JButton();
 
@@ -77,11 +71,11 @@ public class Login extends javax.swing.JFrame {
                     .add(jLabel3)
                     .add(jLabel2))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(btn_loginAdmin, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 101, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(txt_adminUser, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(txt_adminPass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .add(txt_adminUser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .add(txt_senha))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -93,7 +87,7 @@ public class Login extends javax.swing.JFrame {
                 .add(20, 20, 20)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel3)
-                    .add(txt_adminPass, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(txt_senha, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(btn_loginAdmin, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 39, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -117,7 +111,7 @@ public class Login extends javax.swing.JFrame {
             .add(jPanel4Layout.createSequentialGroup()
                 .add(60, 60, 60)
                 .add(btn_entrarVisitante, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 207, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -168,11 +162,25 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginAdminActionPerformed
-      AdminHome adminHome = new AdminHome();
-      adminHome.setVisible(true);
-      this.dispose();
+      String usuario = txt_adminUser.getText();
+      String senha = txt_senha.getPassword().toString();
+      
+      Admin admin = new Admin(usuario, senha);
+      admin.login(usuario, senha);
+      if (admin.isAutenticado()){
+            AdminHome adminHome = new AdminHome();
+            adminHome.setVisible(true);
+            this.dispose();
+      } else {
+          ShowMessageDialog.error("Sua combinação de usuário e senha não confere", "Erro ao logar");
+         limparForm();
+             }
     }//GEN-LAST:event_btn_loginAdminActionPerformed
 
+    private void limparForm() {
+        txt_adminUser.setText("");
+        txt_senha.setText("");
+    }
     private void btn_entrarVisitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarVisitanteActionPerformed
          VisitanteHome visitanteHome = new VisitanteHome();
        visitanteHome.setVisible(true);
@@ -220,7 +228,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField txt_adminPass;
     private javax.swing.JTextField txt_adminUser;
+    private javax.swing.JPasswordField txt_senha;
     // End of variables declaration//GEN-END:variables
+
 }

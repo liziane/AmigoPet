@@ -13,11 +13,20 @@ import model.DbConnection;
 import model.ShowMessageDialog;
 
 public class ListarAnimais extends javax.swing.JFrame {
+    private boolean adminMode = false;
 
     public ListarAnimais() {
         initComponents();
+        btn_excluirAnimais.setVisible(false);
         tableAnimais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         populateTable();
+    }
+    
+     public ListarAnimais(boolean adminMode) {
+        initComponents();
+        tableAnimais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        populateTable();
+        adminMode = true;
     }
     
     public void populateTable(){
@@ -43,10 +52,10 @@ public class ListarAnimais extends javax.swing.JFrame {
         bgPanel = new javax.swing.JPanel();
         lbl_titulo = new javax.swing.JLabel();
         jscrollpListaAnimais = new javax.swing.JScrollPane();
-        panel_gridAnimais = new java.awt.Panel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAnimais = new javax.swing.JTable();
         btn_verDetalhes = new javax.swing.JButton();
+        btn_excluirAnimais = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,8 +63,9 @@ public class ListarAnimais extends javax.swing.JFrame {
 
         lbl_titulo.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         lbl_titulo.setForeground(new java.awt.Color(168, 74, 92));
-        lbl_titulo.setText("Clique sobre uma imagem para saber mais sobre o animal");
+        lbl_titulo.setText("Lista de animais cadastrados");
 
+        tableAnimais.setBackground(new java.awt.Color(251, 220, 196));
         tableAnimais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -67,6 +77,8 @@ public class ListarAnimais extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableAnimais.setSelectionBackground(new java.awt.Color(153, 51, 0));
+        tableAnimais.setShowGrid(true);
         tableAnimais.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 tableAnimaisComponentShown(evt);
@@ -74,25 +86,19 @@ public class ListarAnimais extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableAnimais);
 
-        org.jdesktop.layout.GroupLayout panel_gridAnimaisLayout = new org.jdesktop.layout.GroupLayout(panel_gridAnimais);
-        panel_gridAnimais.setLayout(panel_gridAnimaisLayout);
-        panel_gridAnimaisLayout.setHorizontalGroup(
-            panel_gridAnimaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
-        );
-        panel_gridAnimaisLayout.setVerticalGroup(
-            panel_gridAnimaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panel_gridAnimaisLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 231, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 164, Short.MAX_VALUE))
-        );
-
-        jscrollpListaAnimais.setViewportView(panel_gridAnimais);
+        jscrollpListaAnimais.setViewportView(jScrollPane1);
 
         btn_verDetalhes.setText("Ver detalhes");
         btn_verDetalhes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_verDetalhesActionPerformed(evt);
+            }
+        });
+
+        btn_excluirAnimais.setText("Excluir");
+        btn_excluirAnimais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirAnimaisActionPerformed(evt);
             }
         });
 
@@ -102,12 +108,18 @@ public class ListarAnimais extends javax.swing.JFrame {
             bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(bgPanelLayout.createSequentialGroup()
                 .add(40, 40, 40)
-                .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jscrollpListaAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(lbl_titulo)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(bgPanelLayout.createSequentialGroup()
+                        .add(lbl_titulo)
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(bgPanelLayout.createSequentialGroup()
+                        .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(bgPanelLayout.createSequentialGroup()
+                                .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(jscrollpListaAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 694, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(0, 48, Short.MAX_VALUE))))
         );
         bgPanelLayout.setVerticalGroup(
             bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -115,17 +127,19 @@ public class ListarAnimais extends javax.swing.JFrame {
                 .add(17, 17, 17)
                 .add(lbl_titulo)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jscrollpListaAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 337, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .add(jscrollpListaAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 249, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(15, 15, 15)
+                .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(bgPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(bgPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -162,6 +176,21 @@ public class ListarAnimais extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_verDetalhesActionPerformed
 
+    private void btn_excluirAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirAnimaisActionPerformed
+        int row = tableAnimais.getSelectedRow();
+        Animal animalSelected;
+        AnimaisTableModel model = (AnimaisTableModel) tableAnimais.getModel();
+        if(row != -1) {
+            animalSelected = model.getAnimal(row);
+            animalSelected.excluir();
+        } else {
+            ShowMessageDialog.error("Erro", "Nenhum animal foi selecionado");
+        }
+    }//GEN-LAST:event_btn_excluirAnimaisActionPerformed
+
+    
+   
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -190,11 +219,11 @@ public class ListarAnimais extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgPanel;
+    private javax.swing.JButton btn_excluirAnimais;
     private javax.swing.JButton btn_verDetalhes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jscrollpListaAnimais;
     private javax.swing.JLabel lbl_titulo;
-    private java.awt.Panel panel_gridAnimais;
     private javax.swing.JTable tableAnimais;
     // End of variables declaration//GEN-END:variables
 }
