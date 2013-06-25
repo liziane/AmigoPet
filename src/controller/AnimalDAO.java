@@ -6,7 +6,6 @@ import model.DbConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Admin;
 
 public class AnimalDAO{
     
@@ -67,6 +66,7 @@ public class AnimalDAO{
     }
     
     public void updateAnimal(Animal animal) throws SQLException {
+        System.out.println(animal.getId() + animal.getNome());
         String query = "UPDATE animal "
                 + "SET tipo = ?, raca = ?, nome = ?, idade = ?, observacoes = ?, adotado = ?, adotante = ?"
                 + "WHERE id = ?";
@@ -121,10 +121,11 @@ public class AnimalDAO{
     
     
         public void deleteAnimal(Animal animal) throws SQLException {
-        String query = "DELETE FROM animal WHERE id = '?'";
+        String query = "DELETE FROM animal WHERE id = ?";
         try {
             db.connect();
             db.executeUpdate(query, animal.getId());
+            System.out.println(animal.getId());
         } catch (SQLException ex) {
             throw new SQLException(ex);
         } finally {

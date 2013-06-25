@@ -49,6 +49,8 @@ public class Animal {
            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
+     
+     
     
     public int getId(){
         return this.id;

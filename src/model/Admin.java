@@ -23,13 +23,12 @@ public class Admin {
         this.senha = senha;
         this.autenticado = autenticado;
     }
-    public void login(String usuario, String senha){
-        AdminDAO adminDAO = new AdminDAO(new DbConnection());
-        try {
-            if(adminDAO.login(usuario, senha)){
-                this.autenticado = true;
-            } else {
-                return;
+    public boolean login(String usuario, String senha){
+    AdminDAO adminDAO = new AdminDAO(new DbConnection());
+       try {
+         if(adminDAO.login(usuario, senha)){
+               this.autenticado = true;
+               return this.autenticado;
             }
         } catch (SQLException ex) {
            ShowMessageDialog.error("Erro ao conectar com o banco de dados", nome);
@@ -37,7 +36,9 @@ public class Admin {
             System.out.println(ex);
            ShowMessageDialog.error("erro denovo", nome);
         }
+        return this.autenticado;
     }
+    
 
     public int getId() {
         return id;

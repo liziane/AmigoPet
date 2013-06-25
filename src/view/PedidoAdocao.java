@@ -1,8 +1,10 @@
 package view;
 
+import model.AdotanteTableModel;
 import controller.AdotanteDAO;
 import java.sql.SQLException;
 import java.util.List;
+import model.Adotante;
 import model.AnimaisTableModel;
 import model.Animal;
 import model.DbConnection;
@@ -16,7 +18,7 @@ public class PedidoAdocao extends javax.swing.JFrame {
 
         private void populateComboBoxAdotantes() {
         AdotanteDAO adotanteDAO = new AdotanteDAO(new DbConnection());
-        AnimaisTableModel model = new AnimaisTableModel();
+        AdotanteTableModel model = new AdotanteTableModel();
             List<Adotante> listaAdotantes = adotanteDAO.getListAdotantes();
             model.setLinhas(listaAdotantes);
             jComboBox1.addItem(model);

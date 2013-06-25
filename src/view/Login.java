@@ -4,7 +4,8 @@ import model.Admin;
 import model.ShowMessageDialog;
 
 public class Login extends javax.swing.JFrame {
-
+    Admin novoAdmin = new Admin(1, "Lizi", "lizi", "1234", false);
+    
     public Login() {
         initComponents();
     }
@@ -163,16 +164,16 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginAdminActionPerformed
       String usuario = txt_adminUser.getText();
-      String senha = txt_senha.getPassword().toString();
+      String senha = txt_senha.getText();
       
-      Admin admin = new Admin(usuario, senha);
-      admin.login(usuario, senha);
-      if (admin.isAutenticado()){
+      novoAdmin.login(usuario, senha);
+        System.out.println(senha);
+      if (novoAdmin.isAutenticado()){
             AdminHome adminHome = new AdminHome();
             adminHome.setVisible(true);
             this.dispose();
       } else {
-          ShowMessageDialog.error("Sua combinação de usuário e senha não confere", "Erro ao logar");
+          ShowMessageDialog.error("Sua combinação de usuário e senha não confere", null);
          limparForm();
              }
     }//GEN-LAST:event_btn_loginAdminActionPerformed

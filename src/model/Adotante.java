@@ -1,6 +1,7 @@
 package model;
 
 public class Adotante {
+    private int id;
     private String nome;
     private String cpf;
     private String email;
@@ -14,7 +15,21 @@ public class Adotante {
         this.endereco = endereco;
         this.fone = fone;        
     }
+    
+        public Adotante(int id, String nome, String cpf, String email, String endereco, String fone){
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.endereco = endereco;
+        this.fone = fone;        
+    }
 
+    
+    public int getId() {
+        return id;
+    }
+        
     public String getNome() {
         return nome;
     }
@@ -35,6 +50,10 @@ public class Adotante {
         return fone;
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -54,4 +73,6 @@ public class Adotante {
     public void setFone(String fone) {
         this.fone = fone;
     }
+
+   
 }

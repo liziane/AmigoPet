@@ -14,10 +14,10 @@ import model.ShowMessageDialog;
 
 public class ListarAnimais extends javax.swing.JFrame {
     private boolean adminMode = false;
+    private Animal selectedAnimal;
 
     public ListarAnimais() {
         initComponents();
-        btn_excluirAnimais.setVisible(false);
         tableAnimais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         populateTable();
     }
@@ -51,11 +51,13 @@ public class ListarAnimais extends javax.swing.JFrame {
 
         bgPanel = new javax.swing.JPanel();
         lbl_titulo = new javax.swing.JLabel();
-        jscrollpListaAnimais = new javax.swing.JScrollPane();
+        lbl_msgStatus = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAnimais = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         btn_verDetalhes = new javax.swing.JButton();
         btn_excluirAnimais = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,6 +66,11 @@ public class ListarAnimais extends javax.swing.JFrame {
         lbl_titulo.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         lbl_titulo.setForeground(new java.awt.Color(168, 74, 92));
         lbl_titulo.setText("Lista de animais cadastrados");
+
+        lbl_msgStatus.setBackground(new java.awt.Color(245, 213, 188));
+        lbl_msgStatus.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbl_msgStatus.setForeground(new java.awt.Color(130, 60, 43));
+        lbl_msgStatus.setOpaque(true);
 
         tableAnimais.setBackground(new java.awt.Color(251, 220, 196));
         tableAnimais.setModel(new javax.swing.table.DefaultTableModel(
@@ -79,6 +86,11 @@ public class ListarAnimais extends javax.swing.JFrame {
         ));
         tableAnimais.setSelectionBackground(new java.awt.Color(153, 51, 0));
         tableAnimais.setShowGrid(true);
+        tableAnimais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableAnimaisMouseClicked(evt);
+            }
+        });
         tableAnimais.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 tableAnimaisComponentShown(evt);
@@ -86,7 +98,7 @@ public class ListarAnimais extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableAnimais);
 
-        jscrollpListaAnimais.setViewportView(jScrollPane1);
+        jPanel1.setBackground(new java.awt.Color(245, 213, 188));
 
         btn_verDetalhes.setText("Ver detalhes");
         btn_verDetalhes.addActionListener(new java.awt.event.ActionListener() {
@@ -102,37 +114,66 @@ public class ListarAnimais extends javax.swing.JFrame {
             }
         });
 
+        btn_editar.setText("Editar");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(btn_editar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(btn_editar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout bgPanelLayout = new org.jdesktop.layout.GroupLayout(bgPanel);
         bgPanel.setLayout(bgPanelLayout);
         bgPanelLayout.setHorizontalGroup(
             bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(bgPanelLayout.createSequentialGroup()
-                .add(40, 40, 40)
+                .add(20, 20, 20)
                 .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(lbl_titulo)
                     .add(bgPanelLayout.createSequentialGroup()
-                        .add(lbl_titulo)
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(bgPanelLayout.createSequentialGroup()
-                        .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(bgPanelLayout.createSequentialGroup()
-                                .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 143, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(jscrollpListaAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 694, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(0, 48, Short.MAX_VALUE))))
+                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         bgPanelLayout.setVerticalGroup(
             bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(bgPanelLayout.createSequentialGroup()
-                .add(17, 17, 17)
+                .add(16, 16, 16)
                 .add(lbl_titulo)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jscrollpListaAnimais, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 249, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(15, 15, 15)
-                .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .add(18, 18, 18)
+                .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 255, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -143,7 +184,7 @@ public class ListarAnimais extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(bgPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(bgPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -183,10 +224,29 @@ public class ListarAnimais extends javax.swing.JFrame {
         if(row != -1) {
             animalSelected = model.getAnimal(row);
             animalSelected.excluir();
+            populateTable();
+            lbl_msgStatus.setText("Registro excluído com sucesso!");
         } else {
             ShowMessageDialog.error("Erro", "Nenhum animal foi selecionado");
         }
     }//GEN-LAST:event_btn_excluirAnimaisActionPerformed
+
+    private void tableAnimaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAnimaisMouseClicked
+        lbl_msgStatus.setText("");
+    }//GEN-LAST:event_tableAnimaisMouseClicked
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+       int row = tableAnimais.getSelectedRow();
+        Animal animalSelected;
+        AnimaisTableModel model = (AnimaisTableModel) tableAnimais.getModel();
+        if(row != -1) {
+            animalSelected = model.getAnimal(row);
+        EditarAnimal editAnimal = new EditarAnimal(animalSelected);
+        editAnimal.setVisible(true);
+        } else {
+            lbl_msgStatus.setText("Nenhum animal selecionado.");
+        }
+    }//GEN-LAST:event_btn_editarActionPerformed
 
     
    
@@ -219,10 +279,12 @@ public class ListarAnimais extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgPanel;
+    private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_excluirAnimais;
     private javax.swing.JButton btn_verDetalhes;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jscrollpListaAnimais;
+    private javax.swing.JLabel lbl_msgStatus;
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JTable tableAnimais;
     // End of variables declaration//GEN-END:variables
