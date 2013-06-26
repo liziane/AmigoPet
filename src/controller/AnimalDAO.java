@@ -68,19 +68,20 @@ public class AnimalDAO{
     public void updateAnimal(Animal animal) throws SQLException {
         System.out.println(animal.getId() + animal.getNome());
         String query = "UPDATE animal "
-                + "SET tipo = ?, raca = ?, nome = ?, idade = ?, observacoes = ?, adotado = ?, adotante = ?"
+                + "SET tipo = ?, raca = ?, nome = ?, idade = ?, observacoes = ?, adotado = ?, adotante = ?, imagem = ?"
                 + "WHERE id = ?";
         try {
             db.connect();
             db.executeUpdate(query,
-                    animal.getId(),
                     animal.getTipo(),
                     animal.getRaca(),
                     animal.getNome(),
                     animal.getIdade(),
                     animal.getObservacoes(),
                     animal.isAdotado(),
-                    animal.getAdotante());
+                    animal.getAdotante(),
+                    animal.getUrlImagem(),
+                    animal.getId());
         } catch (SQLException ex) {
             throw new SQLException(ex);
         } finally {
@@ -106,6 +107,21 @@ public class AnimalDAO{
     
     public List<Animal> getListAnimaisNaoAdotados() throws SQLException {
         String query = "SELECT * FROM animal WHERE adotado = '0'";
+        ResultSet result = null;
+        List<Animal> listaAnimais = null;
+        try {
+            db.connect();
+            result = db.executeQuery(query);
+            listaAnimais = mapperAnimal(result);
+        } finally {
+            result.close();
+            db.close();
+        }
+        return listaAnimais;
+    }
+    
+     public List<Animal> getListAnimaisAdotados() throws SQLException {
+        String query = "SELECT * FROM animal WHERE adotado = '1'";
         ResultSet result = null;
         List<Animal> listaAnimais = null;
         try {

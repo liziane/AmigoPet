@@ -5,12 +5,15 @@ import controller.AnimalDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import model.Animal;
 import model.DbConnection;
 
 public class EditarAnimal extends javax.swing.JFrame {
     Animal animalAntes;
-     int id;
+    int id;
+    String urlIcon;
     
     public EditarAnimal() {
         initComponents();
@@ -24,6 +27,7 @@ public class EditarAnimal extends javax.swing.JFrame {
         txt_obs.setText(animal.getObservacoes());
         lbl_imagem.setIcon(animal.getImage());
         animalAntes = animal;
+        urlIcon = animal.getUrlImagem();
         
         
     }
@@ -73,6 +77,11 @@ public class EditarAnimal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txt_obs);
 
         btn_escolherFoto.setText("Escolher foto...");
+        btn_escolherFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_escolherFotoActionPerformed(evt);
+            }
+        });
 
         btn_update.setText("Atualizar");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +200,8 @@ public class EditarAnimal extends javax.swing.JFrame {
                                             txt_obs.getText(), 
                                             animalAntes.isAdotado(),
                                             animalAntes.getAdotante());
-        
+                                            
+        updatedAnimal.setImagem(urlIcon);
         AnimalDAO animalDAO = new AnimalDAO(new DbConnection());
         try {
             animalDAO.updateAnimal(updatedAnimal);
@@ -200,6 +210,13 @@ public class EditarAnimal extends javax.swing.JFrame {
             Logger.getLogger(EditarAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_escolherFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_escolherFotoActionPerformed
+        JFileChooser filechooser = new JFileChooser();
+        filechooser.showDialog(null, null);
+        urlIcon = filechooser.getSelectedFile().getPath();
+        lbl_imagem.setIcon(new ImageIcon(urlIcon));
+    }//GEN-LAST:event_btn_escolherFotoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

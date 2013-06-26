@@ -12,6 +12,7 @@ public class AnimaisTableModel extends TableModel{
         setColunas();
     }
 
+ 
     public AnimaisTableModel() {
         setColunas();
     }
@@ -51,7 +52,8 @@ public class AnimaisTableModel extends TableModel{
             case 1: return animal.getTipo();
             case 2: return animal.getRaca();
             case 3: return animal.getIdade();
-            case 4: return (animal.isAdotado()) ? "Adotado" : "Não adotado";
+            case 4: return animal.getAdotante();
+            case 5: return (animal.isAdotado()) ? "Adotado" : "Não adotado";
         }
         return null;
     }

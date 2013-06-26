@@ -39,7 +39,13 @@ public class Admin {
         return this.autenticado;
     }
     
-
+    public boolean login2(String usuario, String senha){
+        if((usuario.equals("liziane")) && ("1234".equals(senha))) {
+            this.autenticado = true;
+               return this.autenticado;
+        } return this.autenticado;
+    }
+    
     public int getId() {
         return id;
     }

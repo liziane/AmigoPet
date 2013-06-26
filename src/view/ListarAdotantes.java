@@ -26,6 +26,11 @@ public class ListarAdotantes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jscroll_listaAdotantes = new javax.swing.JScrollPane();
         tableAdotantes = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btn_verAdocoes = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
+        btn_excluir = new javax.swing.JButton();
+        lbl_msgStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -42,6 +47,8 @@ public class ListarAdotantes extends javax.swing.JFrame {
             }
         });
 
+        tableAdotantes.setBackground(new java.awt.Color(251, 220, 196));
+        tableAdotantes.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tableAdotantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -60,6 +67,53 @@ public class ListarAdotantes extends javax.swing.JFrame {
         });
         jscroll_listaAdotantes.setViewportView(tableAdotantes);
 
+        jPanel2.setBackground(new java.awt.Color(251, 220, 196));
+
+        btn_verAdocoes.setText("Ver Adoções");
+
+        btn_editar.setText("Editar");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+
+        btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(btn_excluir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                        .add(btn_editar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(btn_verAdocoes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(18, 18, 18))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel2Layout.createSequentialGroup()
+                .add(17, 17, 17)
+                .add(btn_verAdocoes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(btn_editar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(btn_excluir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        lbl_msgStatus.setBackground(new java.awt.Color(251, 220, 196));
+        lbl_msgStatus.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbl_msgStatus.setOpaque(true);
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -67,18 +121,29 @@ public class ListarAdotantes extends javax.swing.JFrame {
             .add(jPanel1Layout.createSequentialGroup()
                 .add(36, 36, 36)
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(jscroll_listaAdotantes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 850, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jLabel1)
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(18, 18, 18)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jscroll_listaAdotantes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE))
+                        .add(42, 42, 42))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
-                .add(30, 30, 30)
+                .add(23, 23, 23)
                 .add(jLabel1)
-                .add(18, 18, 18)
-                .add(jscroll_listaAdotantes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 237, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .add(34, 34, 34)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jscroll_listaAdotantes, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -108,6 +173,37 @@ public class ListarAdotantes extends javax.swing.JFrame {
         }
         tableAdotantes.getSelectionModel().addListSelectionListener(tableAdotantes);
     }//GEN-LAST:event_tableAdotantesComponentShown
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        int row = tableAdotantes.getSelectedRow();
+        Adotante adotanteSelected;
+        AdotanteTableModel model = (AdotanteTableModel) tableAdotantes.getModel();
+        if(row != -1) {
+            adotanteSelected = model.getAdotante(row);
+        EditarAdotante editAdotante = new EditarAdotante(adotanteSelected);
+        editAdotante.setVisible(true);
+        } else {
+            lbl_msgStatus.setText("Nenhum animal selecionado.");
+        }
+    }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+       int row = tableAdotantes.getSelectedRow();
+        Adotante adotanteSelected;
+        AdotanteTableModel model = (AdotanteTableModel) tableAdotantes.getModel();
+        if(row != -1) {
+            adotanteSelected = model.getAdotante(row);
+             try {
+                 adotanteSelected.excluir();
+             } catch (SQLException ex) {
+                 Logger.getLogger(ListarAdotantes.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            populateTable();
+            lbl_msgStatus.setText("Registro excluído com sucesso!");
+        } else {
+            lbl_msgStatus.setText("Selecione um adotante da tabela");
+        }
+    }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void populateTable(){
         AdotanteDAO adotanteDAO = new AdotanteDAO(new DbConnection());
@@ -153,9 +249,14 @@ public class ListarAdotantes extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_editar;
+    private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_verAdocoes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jscroll_listaAdotantes;
+    private javax.swing.JLabel lbl_msgStatus;
     private javax.swing.JTable tableAdotantes;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,6 +39,10 @@ public final class AdotanteTableModel extends TableModel{
         return rows.get(index);
     }
     
+        public Adotante getAdotante(int index) {
+            return rows.get(index);
+    }
+    
     @Override
     public int getRowCount() {
         return this.rows.size();

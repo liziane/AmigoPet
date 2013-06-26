@@ -1,10 +1,13 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Admin;
 import model.ShowMessageDialog;
 
 public class Login extends javax.swing.JFrame {
-    Admin novoAdmin = new Admin(1, "Lizi", "lizi", "1234", false);
+    Admin novoAdmin = new Admin(1, "Lizi", "liziane", "1234", false);
+    
     
     public Login() {
         initComponents();
@@ -166,7 +169,7 @@ public class Login extends javax.swing.JFrame {
       String usuario = txt_adminUser.getText();
       String senha = txt_senha.getText();
       
-      novoAdmin.login(usuario, senha);
+      novoAdmin.login2(usuario, senha);
         System.out.println(senha);
       if (novoAdmin.isAutenticado()){
             AdminHome adminHome = new AdminHome();

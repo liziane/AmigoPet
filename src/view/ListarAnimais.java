@@ -10,7 +10,6 @@ import javax.swing.ListSelectionModel;
 import model.AnimaisTableModel;
 import model.Animal;
 import model.DbConnection;
-import model.ShowMessageDialog;
 
 public class ListarAnimais extends javax.swing.JFrame {
     private boolean adminMode = false;
@@ -58,6 +57,7 @@ public class ListarAnimais extends javax.swing.JFrame {
         btn_verDetalhes = new javax.swing.JButton();
         btn_excluirAnimais = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,7 +65,7 @@ public class ListarAnimais extends javax.swing.JFrame {
 
         lbl_titulo.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         lbl_titulo.setForeground(new java.awt.Color(168, 74, 92));
-        lbl_titulo.setText("Lista de animais cadastrados");
+        lbl_titulo.setText("Gerenciar animais cadastrados");
 
         lbl_msgStatus.setBackground(new java.awt.Color(245, 213, 188));
         lbl_msgStatus.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -129,9 +129,8 @@ public class ListarAnimais extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(btn_excluirAnimais, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(btn_editar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                    .add(btn_editar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(btn_verDetalhes, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,6 +145,14 @@ public class ListarAnimais extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setBackground(new java.awt.Color(102, 51, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon("/Users/lbrandin/Desktop/Screen Shot 2013-06-25 at 9.22.35 PM.png")); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout bgPanelLayout = new org.jdesktop.layout.GroupLayout(bgPanel);
         bgPanel.setLayout(bgPanelLayout);
         bgPanelLayout.setHorizontalGroup(
@@ -158,9 +165,12 @@ public class ListarAnimais extends javax.swing.JFrame {
                         .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(18, 18, 18)
                         .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 666, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, bgPanelLayout.createSequentialGroup()
+                                .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 31, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         bgPanelLayout.setVerticalGroup(
             bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -172,8 +182,10 @@ public class ListarAnimais extends javax.swing.JFrame {
                     .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 255, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .add(bgPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jButton1)
+                    .add(lbl_msgStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -212,7 +224,7 @@ public class ListarAnimais extends javax.swing.JFrame {
             DetalheAnimal detalheAnimal = new DetalheAnimal(animalSelected);
             detalheAnimal.setVisible(true);
         } else {
-            ShowMessageDialog.error("Erro", "Nenhum animal foi selecionado");
+            lbl_msgStatus.setText("Nenhum animal foi selecionado");
         }
         
     }//GEN-LAST:event_btn_verDetalhesActionPerformed
@@ -227,7 +239,7 @@ public class ListarAnimais extends javax.swing.JFrame {
             populateTable();
             lbl_msgStatus.setText("Registro excluído com sucesso!");
         } else {
-            ShowMessageDialog.error("Erro", "Nenhum animal foi selecionado");
+            lbl_msgStatus.setText("Nenhum animal foi selecionado");
         }
     }//GEN-LAST:event_btn_excluirAnimaisActionPerformed
 
@@ -247,6 +259,11 @@ public class ListarAnimais extends javax.swing.JFrame {
             lbl_msgStatus.setText("Nenhum animal selecionado.");
         }
     }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        populateTable();
+        lbl_msgStatus.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
    
@@ -282,6 +299,7 @@ public class ListarAnimais extends javax.swing.JFrame {
     private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_excluirAnimais;
     private javax.swing.JButton btn_verDetalhes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_msgStatus;

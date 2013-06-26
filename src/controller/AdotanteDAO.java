@@ -6,7 +6,6 @@ import model.DbConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Animal;
 
 public class AdotanteDAO{
     
@@ -70,5 +69,41 @@ public class AdotanteDAO{
         }
 
         return listaAdotantes;
+    }
+
+    public void deleteAdotante(Adotante adotante) throws SQLException {
+        String query = "DELETE FROM adotante WHERE id = ?";
+        try {
+            db.connect();
+            db.executeUpdate(query, adotante.getId());
+            System.out.println(adotante.getId());
+        } catch (SQLException ex) {
+            throw new SQLException(ex);
+        } finally {
+            query = null;
+            db.close();
+        }
+    }
+    
+    public void updateAdotante(Adotante adotante) throws SQLException {
+        System.out.println(adotante.getId() + adotante.getNome());
+        String query = "UPDATE adotante "
+                + "SET nome = ?, cpf = ?, email = ?, endereco = ?, fone = ?"
+                + "WHERE id = ?";
+        try {
+            db.connect();
+            db.executeUpdate(query,
+                    adotante.getNome(),
+                    adotante.getCpf(),
+                    adotante.getEmail(),
+                    adotante.getEndereco(),
+                    adotante.getFone(),
+                    adotante.getId());
+        } catch (SQLException ex) {
+            throw new SQLException(ex);
+        } finally {
+            query = null;
+            db.close();
+        }
     }
 }

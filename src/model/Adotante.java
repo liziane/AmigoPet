@@ -1,5 +1,8 @@
 package model;
 
+import controller.AdotanteDAO;
+import java.sql.SQLException;
+
 public class Adotante {
     private int id;
     private String nome;
@@ -72,6 +75,11 @@ public class Adotante {
 
     public void setFone(String fone) {
         this.fone = fone;
+    }
+
+    public void excluir() throws SQLException {
+       AdotanteDAO adotanteDAO = new AdotanteDAO(new DbConnection());
+       adotanteDAO.deleteAdotante(this);
     }
 
    
